@@ -48,6 +48,8 @@ const Scanner: React.FC = () => {
         }
       );
     }
+    console.log(selectedDeviceId)
+    console.log(videoRef.current)
   };
 
   const handleReset = () => {
