@@ -60,8 +60,9 @@ const Scanner: React.FC = () => {
     <main className="wrapper py-8 ">
       <section className="container mx-auto" id="demo-content">
         <h1 className="text-2xl font-bold mb-4 ">Barcode/QRcode Scanner</h1>
-
         <div className="flex gap-2">
+        </div>
+        <div className="flex gap-2 mt-4">
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded"
             onClick={handleStart}
@@ -85,7 +86,8 @@ const Scanner: React.FC = () => {
           ></video>
         </div>
 
-        {videoInputDevices.length > 1 && (
+        {videoInputDevices.length == 0 && (<div>not found device</div>)}
+        {videoInputDevices.length > 0 && (
           <div className="mt-4">
             <label className="block mb-2">Change video source:</label>
             <select
