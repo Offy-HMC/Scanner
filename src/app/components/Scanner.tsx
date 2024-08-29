@@ -33,6 +33,7 @@ const Scanner: React.FC = () => {
 
   const handleStart = () => {
     if (selectedDeviceId && videoRef.current) {
+      console.log("tset",videoRef)
       codeReaderRef.current?.decodeFromVideoDevice(
         selectedDeviceId,
         videoRef.current,
@@ -55,6 +56,9 @@ const Scanner: React.FC = () => {
       resultRef.current.textContent = "";
     }
   };
+
+  const askCameraPermission =
+  async (): Promise<MediaStream | null> => await navigator.mediaDevices.getUserMedia({ video: true });
 
   return (
     <main className="wrapper py-8 ">
