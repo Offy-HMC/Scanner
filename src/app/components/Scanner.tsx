@@ -33,7 +33,7 @@ const Scanner: React.FC = () => {
 
   const handleStart = () => {
     if (selectedDeviceId && videoRef.current) {
-      console.log("tset",videoRef)
+      console.log("test",videoRef.current)
       codeReaderRef.current?.decodeFromVideoDevice(
         selectedDeviceId,
         videoRef.current,
@@ -48,8 +48,8 @@ const Scanner: React.FC = () => {
         }
       );
     }
-    console.log(selectedDeviceId)
-    console.log(videoRef.current)
+    console.log('111',selectedDeviceId)
+    console.log('222',videoRef.current)
   };
 
   const handleReset = () => {
