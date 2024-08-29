@@ -5,13 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 
 const Scanner: React.FC = () => {
+  
   const [videoInputDevices, setVideoInputDevices] = useState<MediaDeviceInfo[]>(
     []
   );
   const [selectedDeviceId, setSelectedDeviceId] = useState<
     string | undefined
   >();
-  const [findDevice , setFindDevice] = useState<Boolean>(false);
+  const [findDevice, setFindDevice] = useState<Boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const codeReaderRef = useRef<BrowserMultiFormatReader | null>(null);
   const resultRef = useRef<HTMLPreElement>(null);
@@ -22,8 +23,7 @@ const Scanner: React.FC = () => {
     codeReader
       .listVideoInputDevices()
       .then((devices) => {
-        console.log('find device:',findDevice)
-        console.log('devices:',devices)
+        console.log("devices:", devices);
         setVideoInputDevices(devices);
         setSelectedDeviceId(devices[0]?.deviceId);
       })
@@ -31,12 +31,13 @@ const Scanner: React.FC = () => {
 
     return () => {
       codeReader.reset();
+      // console.log(codeReader)
     };
   }, [findDevice]);
 
   const handleStart = () => {
+    askCameraPermission();
     if (selectedDeviceId && videoRef.current) {
-      console.log("test",videoRef.current)
       codeReaderRef.current?.decodeFromVideoDevice(
         selectedDeviceId,
         videoRef.current,
@@ -51,8 +52,6 @@ const Scanner: React.FC = () => {
         }
       );
     }
-    console.log('111',selectedDeviceId)
-    console.log('222',videoRef.current)
   };
 
   const handleReset = () => {
@@ -62,15 +61,15 @@ const Scanner: React.FC = () => {
     }
   };
 
-  const askCameraPermission =
-  async (): Promise<MediaStream | null> => await navigator.mediaDevices.getUserMedia({ video: true });
+  const askCameraPermission = async (): Promise<MediaStream | null> =>
+    await navigator.mediaDevices.getUserMedia({ video: true });
 
   return (
     <main className="wrapper py-8 ">
+      
       <section className="container mx-auto" id="demo-content">
         <h1 className="text-2xl font-bold mb-4 ">Barcode/QRcode Scanner</h1>
-        <div className="flex gap-2">
-        </div>
+        <div className="flex gap-2"></div>
         <div className="flex gap-2 mt-4">
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -86,7 +85,7 @@ const Scanner: React.FC = () => {
           </button>
           <button
             className="px-4 py-2 bg-red-500 text-white rounded"
-            onClick= {() => setFindDevice(!findDevice)}
+            onClick={() => setFindDevice(!findDevice)}
           >
             Find Device
           </button>
@@ -101,7 +100,7 @@ const Scanner: React.FC = () => {
           ></video>
         </div>
 
-        {videoInputDevices.length == 0 && (<div>not found device</div>)}
+        {videoInputDevices.length == 0 && <div>not found device</div>}
         {videoInputDevices.length > 0 && (
           <div className="mt-4">
             <label className="block mb-2">Change video source:</label>
