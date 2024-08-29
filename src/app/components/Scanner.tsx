@@ -11,6 +11,7 @@ const Scanner: React.FC = () => {
   const [selectedDeviceId, setSelectedDeviceId] = useState<
     string | undefined
   >();
+  const [findDevice , setFindDevice] = useState<Boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const codeReaderRef = useRef<BrowserMultiFormatReader | null>(null);
   const resultRef = useRef<HTMLPreElement>(null);
@@ -21,6 +22,7 @@ const Scanner: React.FC = () => {
     codeReader
       .listVideoInputDevices()
       .then((devices) => {
+        console.log('find device:',findDevice)
         console.log('devices:',devices)
         setVideoInputDevices(devices);
         setSelectedDeviceId(devices[0]?.deviceId);
@@ -30,7 +32,7 @@ const Scanner: React.FC = () => {
     return () => {
       codeReader.reset();
     };
-  }, []);
+  }, [findDevice]);
 
   const handleStart = () => {
     if (selectedDeviceId && videoRef.current) {
@@ -81,6 +83,12 @@ const Scanner: React.FC = () => {
             onClick={handleReset}
           >
             Reset
+          </button>
+          <button
+            className="px-4 py-2 bg-red-500 text-white rounded"
+            onClick= {() => setFindDevice(!findDevice)}
+          >
+            Find Device
           </button>
         </div>
 
