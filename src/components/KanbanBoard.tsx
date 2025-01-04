@@ -4,6 +4,7 @@ import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import Column from "./Column";
 import { Box } from "@mui/material";
 import { Task, Columns } from "@/schemas/kanbanboard";
+import AddTask from "./AddTask";
 
 const initialData = {
   tasks: {
@@ -66,15 +67,19 @@ export default function KanbanBoard() {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Box sx={{ display: "flex", gap: "16px", padding: "16px" }}>
-        {data.columnOrder.map((columnId: string) => {
-          const column = data.columns[columnId];
-          const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
+    <>
+      <AddTask />
 
-          return <Column key={column.id} column={column} tasks={tasks} />;
-        })}
-      </Box>
-    </DragDropContext>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Box sx={{ display: "flex", gap: "16px", padding: "16px" }}>
+          {data.columnOrder.map((columnId: string) => {
+            const column = data.columns[columnId];
+            const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
+
+            return <Column key={column.id} column={column} tasks={tasks} />;
+          })}
+        </Box>
+      </DragDropContext>
+    </>
   );
 }
