@@ -32,20 +32,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const response = await serverAxios.post("/login", {
-            username: credentials?.username,
+          // const response = await serverAxios.post("/login", {
+          const response = await serverAxios.post("/Authentication/Login", {
+            // username: credentials?.username,
+            userName: credentials?.username,
             password: credentials?.password,
           });
           const user = response.data;
           if (user) {
             // console.log("check user data return from api", user);
-            return {
-              id: user.user.id,
-              name: user.user.fname + " " + user.user.lname,
-              email: user.user.email,
-              username: user.user.username,
-              avatar: user.user.avatar,
-            };
+            // return {
+            //   id: user.user.id,
+            //   name: user.user.fname + " " + user.user.lname,
+            //   email: user.user.email,
+            //   username: user.user.username,
+            //   avatar: user.user.avatar,
+            // };
+            return { ...user };
           } else {
             return null;
           }

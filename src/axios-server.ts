@@ -51,10 +51,10 @@ serverAxios.interceptors.response.use(
           `axios_server_reponse_error_${new Date().toISOString()}:`,
           error.response.status
         );
-        console.error(
-          `axios_server_reponse_data_${new Date().toISOString()}:`,
-          error.response.data
-        );
+        // console.error(
+        //   `axios_server_reponse_data_${new Date().toISOString()}:`,
+        //   error.response.data
+        // );
       }
     }
     return Promise.reject(error);

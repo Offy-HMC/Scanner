@@ -27,7 +27,7 @@ export default function FormLogin() {
       });
 
       if (!response?.error) {
-        router.push("/dashboard");
+        router.push("/home");
       } else {
         console.error("something wrong", response.error);
 

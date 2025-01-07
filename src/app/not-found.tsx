@@ -17,7 +17,7 @@ export default function NotFound() {
 
       return () => clearInterval(interval);
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_BASE_PATH}/dashboard`);
+      router.push(`/home/dashboard`);
     }
   }, [countdown, router]);
 
@@ -38,9 +38,7 @@ export default function NotFound() {
         </Typography>
         <Stack direction={"row"}>
           <Button variant="contained" color="info">
-            <Link href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/dashboard`}>
-              Return Home
-            </Link>
+            <Link href={`/home`}>Return Home</Link>
           </Button>
         </Stack>
       </Stack>

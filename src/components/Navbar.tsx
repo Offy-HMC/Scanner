@@ -1,5 +1,5 @@
-import { stringAvatar } from "@/utils/utilFnc";
-import { AppBar, Toolbar, Box, Stack, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Box, Stack } from "@mui/material";
+import ProfileMenu from "./ProfileMenu";
 
 interface NavbarProps {
   username: string | null | undefined;
@@ -21,10 +21,6 @@ export default function Navbar({ username }: NavbarProps) {
           justifyContent={"flex-end"}
           alignItems={"center"}
         >
-          <Avatar
-            alt={username || ""}
-            {...stringAvatar(username || "unknown", 32)}
-          />
           <Box
             ml={1.5}
             color={"var(--foreground)"}
@@ -33,6 +29,7 @@ export default function Navbar({ username }: NavbarProps) {
           >
             {username}
           </Box>
+          <ProfileMenu username={username} />
         </Stack>
       </Toolbar>
     </AppBar>
